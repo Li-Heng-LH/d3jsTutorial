@@ -23,5 +23,26 @@ svg.selectAll("rect")
 	.attr("height",function(d){
 		return d*4;
 	})
-	.attr("fill", "teal");
+	.attr("fill", function (d) {
+		return "rgb(0,0,"+(d*10)+")";
+	});
+
+svg.selectAll("text")
+	.data(dataset)
+	.enter()
+	.append("text")
+	.text(function(d){
+		return d;
+	})
+	.attr("x",function(d,i){
+		return i*(w/dataset.length)+5;
+	})
+	.attr("y", function(d){
+		return h-(d*4)+15;
+	})
+	.attr("fill","white")
+	.attr("font-family","sans-serif")
+	.attr("font-size","11px");
+
+
 
