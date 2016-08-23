@@ -1,4 +1,4 @@
-//book6_3.js
+//book6_3.js and chapter 7 scatter plot 
 //scatterplot 
 
 var dataset = [
@@ -25,4 +25,21 @@ svg.selectAll("circle")
 		return d[1];
 	})
 	.attr("r",5);
+
+svg.selectAll("text")
+	.data(dataset)
+	.enter()
+	.append("text")
+	.text(function(d){
+		return d[0]+","+d[1];
+	})
+	.attr("x",function(d){
+		return d[0];
+	})
+	.attr("y", function(d){
+		return d[1];
+	})
+	.attr("font-size", "11px")
+	.attr("fill", "red")
+	.attr("font-family", "sans-serif");
 
