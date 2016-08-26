@@ -1,4 +1,4 @@
-//book6_3.js and chapter 7 scatter plot 
+//book6_3.js and chapter 7 scale and chapter 8 axes
 //scatterplot 
 
 var dataset = [
@@ -9,7 +9,7 @@ var dataset = [
 
 var w = 500;
 var h = 300;
-var padding = 20;
+var padding = 30;
 
 var xScale = d3.scale.linear()
 					.domain ([0, d3.max(dataset,function(d){
@@ -24,6 +24,16 @@ var yScale = d3.scale.linear()
 					})])
 					.range ([h-padding,padding])
 					.nice();
+
+var xAxis = d3.svg.axis()
+				.scale(xScale) // need to pass in a scale
+				.orient("bottom")
+				.ticks(5); //actual is 7. Smart overriding here
+
+var yAxis = d3.svg.axis()
+				.scale(yScale)
+				.orient("left")
+				.ticks(5); 
 
 //RMB, we want to set the radius according to the height of the circles
 var rScale = d3.scale.linear()
@@ -68,6 +78,17 @@ svg.selectAll("text")
 	.attr("font-size", "11px")
 	.attr("fill", "red")
 	.attr("font-family", "sans-serif");
+
+// draw the axes here so that they appear "on top"
+svg.append("g") //put the axis as a group so that we can style and transform as a group later
+	.attr("class", "axis")
+	.attr("transform", "translate(0,"+(h-padding)+")")
+	.call(xAxis);
+
+svg.append("g") //put the axis as a group so that we can style and transform as a group later
+	.attr("class", "axis")
+	.attr("transform", "translate("+padding+",0)")
+	.call(yAxis);
 
 
 
